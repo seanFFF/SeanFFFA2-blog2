@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        #div{
+            width: 100px;
+            height:100px;
+            background-color: #f00;
+            position: absolute;
+            /* left:100px; */
+        }
+        button{
+            position: relative;
+            top:120px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div"></div>
+    <button>start</button>
+    <button>stop</button>
+    <script>
+        // 1.The aim is to make an element move, (movement of position)
+        // 2.The elements need to be moved continuously and a switch is required to do so
+        // 3.Need to condition the move and set the parameters for the move distance
+        let buts = document.getElementsByTagName('button');
+        let div = document.getElementById('div');
+        let body = document.body;
+        let num = 0;
+        let timer = null;
+        buts[0].onclick = function(){
+            // Set a variable speed for object movement
+            let speed = 5;
+            if(timer==null){
+                timer = setInterval(()=>{
+                    num += speed;//Speed of movement of an object
+                    div.style.left = num+'px';
+                    // When the travel distance is greater than the body width or less than 0
+                    if(num>=body.offsetWidth-div.offsetWidth || num<=0){
+                       speed = -speed;
+                    }
+                },100);
+            }
+        }
+        buts[1].onclick = function(){
+            clearInterval(timer);
+            timer=null;
+        }
+
+    </script>
+</body>
+</html>
